@@ -1,0 +1,40 @@
+.battery {
+  width: 120px;
+}
+
+.battery-body {
+  width: 100%;
+  height: 25px;
+  border: 2px solid white;
+  position: relative;
+}
+
+.battery-level {
+  height: 100%;
+  background: limegreen;
+}
+
+.water-container {
+  width: 60px;
+  height: 120px;
+  border: 2px solid white;
+  position: relative;
+}
+
+.water-bar {
+  width: 100%;
+  background: deepskyblue;
+  position: absolute;
+  bottom: 0;
+}
+
+.water-bar.low {
+  background: red;
+}
+
+.water-text {
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+}

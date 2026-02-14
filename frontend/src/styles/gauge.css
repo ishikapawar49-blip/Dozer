@@ -1,0 +1,36 @@
+.gauge {
+  text-align: center;
+  width: 180px;
+}
+
+.gauge-circle {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 8px solid #444;
+  position: relative;
+  margin: auto;
+  background: radial-gradient(circle, #222 40%, #111 100%);
+}
+
+.needle {
+  width: 3px;
+  height: 70px;
+  background: red;
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform-origin: bottom;
+  transition: transform 0.5s ease;
+}
+
+.center-dot {
+  width: 12px;
+  height: 12px;
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
