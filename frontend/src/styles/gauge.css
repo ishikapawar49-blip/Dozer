@@ -1,36 +1,88 @@
-.gauge {
-  text-align: center;
-  width: 180px;
+.gauge-wrapper {
+  width: 240px;
+  height: 240px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.gauge-circle {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  border: 8px solid #444;
-  position: relative;
-  margin: auto;
-  background: radial-gradient(circle, #222 40%, #111 100%);
+.gauge-wrapper svg {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
+
+/* metallic rings */
+.ring-outer {
+  fill: #bbb;
+  stroke: #555;
+  stroke-width: 4;
+}
+
+.ring-inner {
+  fill: radial-gradient(circle, #2a2a2a 40%, #000 100%);
+}
+
+/* zones */
+.zone-green { fill: #22c55e; }
+.zone-yellow { fill: #eab308; }
+.zone-red { fill: #ef4444; }
+
+/* ticks */
+.tick-line {
+  stroke: white;
+  stroke-width: 2;
+}
+
+.tick-number {
+  fill: white;
+  font-size: 10px;
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+/* needle */
 .needle {
-  width: 3px;
-  height: 70px;
-  background: red;
-  position: absolute;
-  bottom: 50%;
-  left: 50%;
-  transform-origin: bottom;
+  stroke: red;
+  stroke-width: 3;
+  stroke-linecap: round;
   transition: transform 0.5s ease;
 }
 
-.center-dot {
-  width: 12px;
-  height: 12px;
-  background: white;
-  border-radius: 50%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.needle-center {
+  fill: white;
+  stroke: black;
+  stroke-width: 2;
+}
+
+/* text */
+.gauge-label {
+  fill: #ccc;
+  font-size: 11px;
+}
+
+/* .gauge-value {
+  fill: white;
+  font-size: 15px;
+  font-weight: bold;
+} */
+/*  */
+
+.gauge-row {
+  position: relative;
+
+  width: 100%;
+  max-width: 900px;        /* laptop design width */
+  aspect-ratio: 900 / 520; /* ⭐ height auto responsive */
+
+  margin: 50px auto;
+}
+/* scale entire gauge layout based on screen width */
+@media (max-width: 900px) {
+  .gauge-row {
+    transform: scale(calc(100vw / 900));
+    transform-origin: top center;
+  }
 }

@@ -1,14 +1,18 @@
 import React from "react";
-import "../styles/indicators.css";
+import "../styles/waterLevel.css";
 
-const WaterLevelBar = ({ value }) => {
+const WaterLevelBar = ({ level = 0 }) => {
+  const percent = Math.max(0, Math.min(100, level));
+
   return (
-    <div className="water-container">
-      <div
-        className={`water-bar ${value < 20 ? "low" : ""}`}
-        style={{ height: `${value}%` }}
-      />
-      <span className="water-text">{value}%</span>
+    <div className="water-card">
+      <span className="status-label">Water Level</span>
+
+      <div className="bucket">
+        <div className="water" style={{ height: `${percent}%` }} />
+      </div>
+
+      <div className="water-text">{percent.toFixed(0)}%</div>
     </div>
   );
 };

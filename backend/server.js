@@ -1,47 +1,56 @@
 import express from "express";
-import cors from "cors";
 import http from "http";
 import { Server } from "socket.io";
+import mongoose from "mongoose";
+import cors from "cors";
+import dotenv from "dotenv";
+
+import { initSocket } from "./services/socketService.js";
+import { startTelemetrySimulator } from "./simulator/telemetrySimulator.js";
+import telemetryRoutes from "./routes/telemetryRoutes.js";
+
+dotenv.config(); // ⭐ MUST BE BEFORE mongoose.connect
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use("/api/telemetry", telemetryRoutes);
+/* ===== MongoDB ===== */
+const MONGO_URI = process.env.MONGO_URI;
 
-// basic test route
-app.get("/", (req, res) => {
-  res.send("Dozer Backend Running 🚜");
-});
+if (!MONGO_URI) {
+  console.error("❌ MONGO_URI missing in .env");
+  process.exit(1); // stop server if DB not configured
+}
 
+mongoose
+  .connect(MONGO_URI)
+  .then(() => {
+    console.log("🟢 MongoDB connected");
+
+    // ⭐ start simulator ONLY after DB connected
+    startTelemetrySimulator();
+  })
+  .catch((err) => {
+    console.error("Mongo error:", err);
+    process.exit(1);
+  });
+
+/* ===== HTTP + SOCKET ===== */
 const server = http.createServer(app);
 
-// socket.io setup
 const io = new Server(server, {
-  cors: { origin: "*" }
+  cors: { origin: "*" },
 });
 
+initSocket(io);
+
+/* ===== SOCKET CONNECTION ===== */
 io.on("connection", (socket) => {
-  console.log("Client connected");
-
-  // send fake telemetry every 2 seconds
-  setInterval(() => {
-    const data = {
-      dozerId: "DOZ-12345",
-      timestamp: new Date(),
-      engineOilPressure: +(Math.random() * 8).toFixed(1),
-      transmissionOilPressure: +(Math.random() * 3).toFixed(1),
-      transmissionOilTemp: +(60 + Math.random() * 60).toFixed(1),
-      waterTemp: +(60 + Math.random() * 60).toFixed(1),
-      waterLevel: +(Math.random() * 100).toFixed(1),
-      batteryStatus: +(11 + Math.random() * 2).toFixed(1),
-      batteryCharging: Math.random() > 0.5,
-      engineOn: true
-    };
-
-    socket.emit("telemetry", data);
-  }, 2000);
+  console.log("🔌 Client connected:", socket.id);
 });
 
-// IMPORTANT: start server
+/* ===== START SERVER ===== */
 server.listen(5000, () => {
-  console.log("🚀 Server running on http://localhost:5000");
+  console.log("🚀 Server running on 5000");
 });

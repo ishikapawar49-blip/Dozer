@@ -1,40 +1,65 @@
-.battery {
-  width: 120px;
+/* CARD */
+.indicator-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 18px 22px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 16px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+  min-width: 120px;
+}
+
+/* LABEL */
+.status-label {
+  font-size: 14px;
+  color: #9ca3af;
+  letter-spacing: 0.5px;
+}
+
+/* VALUE TEXT */
+.indicator-value {
+  font-size: 20px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.indicator-sub {
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+/* ================= BATTERY ================= */
+
+.battery-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.battery-head {
+  width: 18px;
+  height: 6px;
+  background: #e5e7eb;
+  border-radius: 2px;
+  margin-bottom: 2px;
 }
 
 .battery-body {
-  width: 100%;
-  height: 25px;
-  border: 2px solid white;
-  position: relative;
+  width: 46px;
+  height: 90px;
+  border: 3px solid #e5e7eb;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  background: #020617;
 }
 
 .battery-level {
-  height: 100%;
-  background: limegreen;
-}
-
-.water-container {
-  width: 60px;
-  height: 120px;
-  border: 2px solid white;
-  position: relative;
-}
-
-.water-bar {
   width: 100%;
-  background: deepskyblue;
-  position: absolute;
-  bottom: 0;
-}
-
-.water-bar.low {
-  background: red;
-}
-
-.water-text {
-  position: absolute;
-  top: -25px;
-  left: 50%;
-  transform: translateX(-50%);
+  transition: height 0.4s ease, background 0.4s ease;
+  border-radius: 6px 6px 4px 4px;
 }

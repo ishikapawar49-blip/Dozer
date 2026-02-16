@@ -1,0 +1,56 @@
+.engine-toggle {
+  cursor: pointer;
+}
+
+/* track */
+.toggle-track {
+  width: 130px;
+  height: 48px;
+  border-radius: 30px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  transition: 0.3s ease;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.4);
+}
+
+/* ON state */
+.toggle-track.on {
+  background: linear-gradient(145deg, #22c55e, #16a34a);
+  box-shadow: 0 0 18px rgba(34,197,94,0.7);
+}
+
+/* OFF state */
+.toggle-track.off {
+  background: linear-gradient(145deg, #ef4444, #b91c1c);
+  box-shadow: 0 0 18px rgba(239,68,68,0.6);
+}
+
+/* circle thumb */
+.toggle-thumb {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #f1f5f9;
+  position: absolute;
+  top: 5px;
+  left: 6px;
+  transition: 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+/* move right when ON */
+.toggle-track.on .toggle-thumb {
+  left: 86px;
+}
+
+/* text */
+.toggle-text {
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  font-size: 16px;
+  letter-spacing: 1px;
+}
