@@ -1,0 +1,50 @@
+/* ===== SIDEBAR CONTAINER ===== */
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  background-color: #0f172a;   /* Dark navy */
+  color: #ffffff;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
+/* ===== LOGO / TITLE ===== */
+.sidebar .logo {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 40px;
+  letter-spacing: 1px;
+}
+
+/* ===== NAVIGATION ===== */
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* ===== LINKS ===== */
+.sidebar a {
+  text-decoration: none;
+  color: #cbd5e1;
+  font-size: 15px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  transition: 0.3s ease;
+}
+
+/* Hover Effect */
+.sidebar a:hover {
+  background-color: #1e293b;
+  color: #ffffff;
+}
+
+/* Active Link */
+.sidebar a.active {
+  background-color: #2563eb;
+  color: white;
+}

@@ -13,8 +13,14 @@ export function initAudio() {
 }
 
 export function playBeep(type = "normal") {
+
+  // 🔥 AUTO INIT if not initialized
   if (!audioCtx) {
-    console.log("⛔ Audio not initialized");
+    initAudio();
+  }
+
+  if (!audioCtx) {
+    console.log("⛔ Audio still not initialized");
     return;
   }
 
@@ -25,10 +31,10 @@ export function playBeep(type = "normal") {
   gain.connect(audioCtx.destination);
 
   if (type === "low") osc.frequency.value = 400;
-  else if (type === "full") osc.frequency.value = 900;
+  else if (type === "high") osc.frequency.value = 900;
   else osc.frequency.value = 700;
 
-  gain.gain.setValueAtTime(1, audioCtx.currentTime);
+  gain.gain.setValueAtTime(0.5, audioCtx.currentTime);
 
   osc.start();
   osc.stop(audioCtx.currentTime + 0.4);

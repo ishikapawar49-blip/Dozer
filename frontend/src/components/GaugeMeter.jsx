@@ -85,14 +85,34 @@ const minorTicks =
 
   return (
     <div className="gauge-wrapper">
-      <svg width={size} height={size}>
-        <g transform={`translate(${center}, ${center})`}>
+     <svg width={size} height={size}>
 
+  {/* ===== GRADIENT DEFINITIONS ===== */}
+<defs>
+  {/* Base dark grey face */}
+  <radialGradient id="meterGradient" cx="50%" cy="55%" r="75%">
+    <stop offset="0%" stopColor="#6e6e6e" />
+    <stop offset="55%" stopColor="#4b4b4b" />
+    <stop offset="100%" stopColor="#2b2b2b" />
+  </radialGradient>
+
+  {/* Top curved reflection */}
+  <linearGradient id="meterHighlight" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stopColor="rgba(255,255,255,0.32)" />
+    <stop offset="60%" stopColor="rgba(255,255,255,0.10)" />
+    <stop offset="100%" stopColor="rgba(255,255,255,0)" />
+  </linearGradient>
+</defs>
+
+  <g transform={`translate(${center}, ${center})`}>
           {/* ===== OUTER METAL RING ===== */}
-          <circle r={radius + 10} className="ring-outer" />
-          <circle r={radius} className="ring-inner" />
+         <circle r={radius + 10} className="ring-outer" />
+         <circle r={radius} className="ring-inner" />
 
-          {/* ===== COLOR ZONES ===== */}
+{/* ===== GLASS REFLECTION ARC ===== */}
+{/* ===== HALF-MOON INNER REFLECTION ===== */}
+
+
         {/* ===== COLOR ZONES ===== */}
 {zones.map((z, i) => (
   <path
@@ -104,8 +124,6 @@ const minorTicks =
     className={z.color}
   />
 ))}
-
-
           {/* ===== TICKS + NUMBERS ===== */}
           {majorTicks.map((t, i) => {
            const digitOffset =-1.57; // ⭐ tuning value for perfect OEM alignment
@@ -186,18 +204,13 @@ const minorTicks =
 
           {/* ===== LABEL ===== */}
   {/* ===== LABEL ===== */}
-<text y="10" textAnchor="middle" className="gauge-label">
+<text y="25" textAnchor="middle" className="gauge-label">
   {label.split("\n").map((line, i) => (
     <tspan key={i} x="0" dy={i === 0 ? 0 : 12}>
       {line}
     </tspan>
   ))}
 </text>
-
-          {/* ===== VALUE ===== */}
-          <text y="50" textAnchor="middle" className="gauge-value">
-            {value.toFixed(1)} {unit}
-          </text>
 
           {/* ===== MIN / MAX TEXT ===== */}
 {/* ===== MIN / MAX TEXT (only for non-temp meters) ===== */}

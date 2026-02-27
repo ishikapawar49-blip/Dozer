@@ -1,0 +1,68 @@
+.alert-card {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 260px;
+  padding: 16px 18px;
+  border-radius: 14px;
+
+  /* white glass card */
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+
+  color: #111;
+  font-size: 13px;
+
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+
+.alert-card h4 {
+  margin-bottom: 12px;
+  font-size: 15px;
+  text-align: center;
+  font-weight: 600;
+  
+}
+
+/* ===== TABLE-LIKE GRID ===== */
+.alert-row {
+  display: grid;
+  grid-template-columns: 1.4fr 0.7fr 0.9fr;
+  align-items: center;
+
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+/* remove last border */
+.alert-row:last-child {
+  border-bottom: none;
+}
+
+/* alignment like table columns */
+.alert-row span:nth-child(1) {
+  text-align: left;
+}
+
+.alert-row span:nth-child(2) {
+  text-align: center;
+  font-weight: 500;
+}
+
+.alert-row span:nth-child(3) {
+  text-align: right;
+  font-weight: 600;
+}
+
+/* ===== STATUS COLORS ===== */
+.alert-row.low {
+  color: #ff3b30;
+}
+
+.alert-row.high {
+  color: #ff3b30;
+}
+
+.alert-row.normal {
+  color: #111;
+}

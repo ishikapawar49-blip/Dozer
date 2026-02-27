@@ -1,0 +1,387 @@
+.wrapper {
+  max-width: 1100px;
+  margin: auto;
+  padding: 32px;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 28px;
+  margin-bottom: 24px;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+}
+
+.title {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+.title-sm {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
+.field label {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.field input,
+.field select {
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  transition: 0.2s;
+}
+
+.field input:focus,
+.field select:focus {
+  border-color: #0ea5e9;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(14,165,233,0.15);
+}
+
+.field small {
+  color: #ef4444;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.footer {
+  grid-column: span 2;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.footer button {
+  background: #0ea5e9;
+  color: #fff;
+  border: none;
+  padding: 12px 26px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.footer button:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
+}
+
+/* ===== LIST ===== */
+
+.row {
+  position: relative;
+  background: #f8fafc;
+  padding: 16px;
+  border-radius: 14px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.muted {
+  font-size: 13px;
+  color: #64748b;
+}
+
+.meta {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+/* ===== STATUS BADGES ===== */
+
+.badge {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badge.active {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.badge.inactive {
+  background: #fef9c3;
+  color: #854d0e;
+}
+
+.badge.maintenance {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* ===== MENU ===== */
+
+.menu {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: absolute;
+  right: 0;
+  top: 24px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.15);
+  overflow: hidden;
+}
+
+.dropdown button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 140px;
+  padding: 10px 14px;
+  border: none;
+  background: white;
+  cursor: pointer;
+}
+
+.dropdown button:hover {
+  background: #f1f5f9;
+}
+
+.delete {
+  color: #ef4444;
+}
+/* final */
+.section-title {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+
+/* list layout */
+.dozer-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* main card */
+.dozer-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  background: #f7f9fc;
+  border-radius: 14px;
+  padding: 18px 22px;
+  transition: 0.25s ease;
+  position: relative;
+}
+
+.dozer-card:hover {
+  background: #eef3fb;
+  transform: translateY(-2px);
+}
+
+/* LEFT */
+.dozer-info h4 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.dozer-info p {
+  margin: 4px 0;
+  font-size: 14px;
+  color: #5b6b7a;
+}
+
+.cost {
+  margin-top: 6px;
+  font-weight: 600;
+  color: #1e88e5;
+}
+
+/* RIGHT */
+.dozer-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+/* status badge */
+.status {
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.status.active {
+  background: #d4f4dd;
+  color: #1b7f3a;
+}
+
+.status.inactive {
+  background: #fde7b2;
+  color: #8a5a00;
+}
+
+.status.maintenance {
+  background: #ffe0e0;
+  color: #c62828;
+}
+
+/* year */
+.year {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+/* dropdown */
+.menu {
+  position: relative;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: absolute;
+  right: 0;
+  top: 24px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  z-index: 10;
+}
+
+.dropdown button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 120px;
+  padding: 10px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.dropdown button:hover {
+  background: #f1f5ff;
+}
+
+.dropdown .delete {
+  color: #e53935;
+}
+/* final */
+/* ===== PAGE HEADER ===== */
+.add-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.page-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+/* ===== PRIMARY BUTTON ===== */
+.primary-btn {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: #fff;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.primary-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.35);
+}
+
+/* ===== TOOLBAR ===== */
+.add-page-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffffff;
+  padding: 14px;
+  border-radius: 16px;
+  margin-bottom: 24px;
+}
+
+/* ===== SEARCH ===== */
+.search-box {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;   
+  padding: 10px 14px;
+  width: 100%;
+  max-width: 580px;
+}
+
+.search-box input {
+  border: none;
+  outline: none;
+  margin-left: 8px;
+  width: 100%;
+}
+
+/* ===== RIGHT ACTIONS ===== */
+.toolbar-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.icon-btn {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  padding: 10px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.filter-dropdown {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  padding: 10px 14px;
+  border-radius: 12px;
+}
+.secondary-btn {
+  background: #0ea5e9;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+.secondary-btn:hover {
+  background: #0ea5e9;
+}

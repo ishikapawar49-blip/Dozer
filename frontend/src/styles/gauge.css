@@ -13,22 +13,20 @@
   display: block;
 }
 
-
 /* metallic rings */
 .ring-outer {
   fill: #bbb;
   stroke: #555;
   stroke-width: 4;
 }
-
 .ring-inner {
-  fill: radial-gradient(circle, #2a2a2a 40%, #000 100%);
+  fill: url(#meterGradient);
 }
 
 /* zones */
-.zone-green { fill: #22c55e; }
+.zone-green { fill: #39FF14; }
 .zone-yellow { fill: #eab308; }
-.zone-red { fill: #ef4444; }
+.zone-red { fill: #FF3B30; }
 
 /* ticks */
 .tick-line {
@@ -53,13 +51,14 @@
 
 .needle-center {
   fill: white;
-  stroke: black;
+  stroke: grey;
   stroke-width: 2;
 }
 
 /* text */
 .gauge-label {
-  fill: #ccc;
+
+  fill: #ffffff;
   font-size: 11px;
 }
 
@@ -72,13 +71,14 @@
 
 .gauge-row {
   position: relative;
-
   width: 100%;
-  max-width: 900px;        /* laptop design width */
-  aspect-ratio: 900 / 520; /* ⭐ height auto responsive */
-
+  max-width: 900px;       
+  aspect-ratio: 900 / 520;
   margin: 50px auto;
 }
+
+
+
 /* scale entire gauge layout based on screen width */
 @media (max-width: 900px) {
   .gauge-row {

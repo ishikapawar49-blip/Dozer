@@ -1,7 +1,12 @@
 import mongoose from "mongoose";
 
 const telemetrySchema = new mongoose.Schema({
-  dozerId: String,
+  dozerId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Dozer",
+    required: true
+  },
+
   timestamp: { type: Date, default: Date.now },
 
   engineOilPressure: Number,

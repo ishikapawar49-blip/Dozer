@@ -1,0 +1,391 @@
+/* ===== PAGE WRAPPER ===== */
+.wrapper {
+  padding: 24px;
+  background: #f6f8fb;
+  min-height: 100vh;
+}
+
+/* ===== HEADER ===== */
+.add-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.page-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+/* ===== PRIMARY BUTTON ===== */
+.primary-btn {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.primary-btn:hover {
+  background: #1e4fd8;
+}
+
+/* ===== TOOLBAR ===== */
+.add-page-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffffff;
+  padding: 14px;
+  border-radius: 16px;
+  margin-bottom: 20px;
+}
+
+/* ===== SEARCH ===== */
+.search-box {
+  display: flex;
+  align-items: center;
+  background: white;
+  padding: 10px 14px;
+  border-radius: 12px;
+  width: 60%;
+  border: 1px solid #e5e7eb;
+}
+
+.search-icon {
+  margin-right: 8px;
+  color: #6b7280;
+}
+
+.search-box input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 14px;
+}
+
+/* ===== FILTER AREA ===== */
+.toolbar-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.icon-btn {
+  background: white;
+  border: 1px solid #e5e7eb;
+  padding: 8px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.filter-dropdown {
+  background: white;
+  border: 1px solid #e5e7eb;
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* ===== CARD ===== */
+.card {
+  background: white;
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+/* ===== TABLE ===== */
+.dozer-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.dozer-table thead {
+  background: #f1f5f9;
+}
+
+.dozer-table th {
+  text-align: left;
+  padding: 14px;
+  font-size: 14px;
+  color: #475569;
+  font-weight: 600;
+}
+
+.dozer-table td {
+  padding: 14px;
+  border-top: 1px solid #f1f5f9;
+  font-size: 14px;
+  color: #0f172a;
+}
+
+/* ===== ROW HOVER ===== */
+.dozer-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+/* ===== STATUS BADGE ===== */
+.status {
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status.active {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.status.inactive {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.status.maintenance {
+  background: #fef9c3;
+  color: #ca8a04;
+}
+
+/* ===== EMPTY STATE ===== */
+.dozer-table td[colspan] {
+  padding: 40px 0;
+  color: #64748b;
+  font-size: 15px;
+}
+/*  */
+.card {
+  background: white;
+  border-radius: 18px;
+  /* padding: 18px; */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  overflow-x: auto;
+}
+.wrapper {
+  padding: 24px;
+  background: #f6f8fb;
+  min-height: 100vh;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;   /* 🔥 ADD THIS */
+  box-sizing: border-box;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;   /* 🔥 THIS FIXES PAGE SHIFT */
+}
+/* ===== TABLE ===== */
+.dozer-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;   /* 🔥 VERY IMPORTANT */
+}
+
+.dozer-table th,
+.dozer-table td {
+  padding: 14px;
+  border-top: 1px solid #f1f5f9;
+  font-size: 14px;
+  color: #0f172a;
+  word-break: break-word;     /* 🔥 wrap long text */
+  white-space: normal;        /* 🔥 allow multi-line */
+}
+/* final */
+/* ===== TOGGLE SWITCH ===== */
+
+.status-toggle-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 46px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color: #d1d5db;
+  border-radius: 34px;
+  transition: 0.3s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  top: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+/* Active state */
+.switch input:checked + .slider {
+  background-color: #22c55e;
+}
+
+.switch input:checked + .slider:before {
+  transform: translateX(22px);
+}
+
+/* Status Text */
+.status-text {
+  font-weight: 600;
+}
+
+.active-text {
+  color: #16a34a;
+}
+
+.inactive-text {
+  color: #dc2626;
+}
+/*  */
+.status-toggle-wrapper {
+  display: flex;
+  flex-direction: column;   /* 🔥 vertical layout */
+  align-items: center;      /* center align */
+  gap: 6px;
+}
+.status-text {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.active-text {
+  color: #16a34a;
+}
+
+.inactive-text {
+  color: #dc2626;
+}
+
+/* final */
+/* ===== ACTION BUTTONS (Premium) ===== */
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+
+.edit-btn,
+.delete-btn {
+  width: 80px;
+  padding: 6px 0;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Edit */
+.edit-btn {
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.edit-btn:hover {
+  background: #2563eb;
+  color: white;
+}
+
+/* Delete */
+.delete-btn {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.delete-btn:hover {
+  background: #dc2626;
+  color: white;
+}
+/*  */
+/* ===== RECTANGULAR STAT CARDS ===== */
+
+.stats-cards {
+  display: flex;
+  gap: 20px;
+  justify-content: flex-start;
+}
+
+.stat-card {
+  width: 180px;   
+  height: 85px;
+  padding: 15px 22px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+/* Dark gradient */
+.dark-card {
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  color: white;
+ 
+}
+
+/* Icon Box */
+.card-icon {
+  font-size: 30px;
+  padding: 15px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Individual Colors */
+.total-card .card-icon {
+  background: rgba(59,130,246,0.15);
+  color: #3b82f6;
+}
+
+.active-card .card-icon {
+  background: rgba(34,197,94,0.15);
+  color: #22c55e;
+}
+
+.inactive-card .card-icon {
+  background: rgba(239,68,68,0.15);
+  color: #ef4444;
+}
+
+/* Text */
+.stat-card h2 {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.stat-card p {
+  margin: 4px 0 0;
+  font-size: 14px;
+  opacity: 0.75;
+}

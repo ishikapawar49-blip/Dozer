@@ -8,13 +8,18 @@ import dotenv from "dotenv";
 import { initSocket } from "./services/socketService.js";
 import { startTelemetrySimulator } from "./simulator/telemetrySimulator.js";
 import telemetryRoutes from "./routes/telemetryRoutes.js";
-
+import dozerRoutes from "./routes/dozerRoutes.js";
+import serviceRoutes from "./routes/serviceRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 dotenv.config(); // ⭐ MUST BE BEFORE mongoose.connect
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 app.use("/api/telemetry", telemetryRoutes);
+app.use("/api/dozers", dozerRoutes);
+app.use("/api/services", serviceRoutes);
+app.use("/api/users", userRoutes);
 /* ===== MongoDB ===== */
 const MONGO_URI = process.env.MONGO_URI;
 

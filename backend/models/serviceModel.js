@@ -1,0 +1,29 @@
+import mongoose from "mongoose";
+
+const serviceSchema = new mongoose.Schema({
+  dozerId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Dozer",
+    required: true,
+  },
+  serviceType: {
+    type: String,
+    required: true,
+  },
+  serviceDate: {
+    type: Date,
+    required: true,
+  },
+  nextServiceDate: {
+    type: Date,
+    required: true,
+  },
+  cost: {
+    type: Number,
+    default: 0,
+  },
+  serviceCenter: String,
+  notes: String,
+}, { timestamps: true });
+
+export default mongoose.model("Service", serviceSchema);

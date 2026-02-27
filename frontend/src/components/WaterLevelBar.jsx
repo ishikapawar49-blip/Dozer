@@ -6,13 +6,22 @@ const WaterLevelBar = ({ level = 0 }) => {
 
   return (
     <div className="water-card">
-      <span className="status-label">Water Level</span>
 
       <div className="bucket">
-        <div className="water" style={{ height: `${percent}%` }} />
+
+        {/* water fill */}
+        <div
+          className="water"
+          style={{ height: `${percent}%` }}
+        />
+
+        {/* 🔥 percent INSIDE container */}
+        <div className="water-percent-inside">
+          {percent.toFixed(0)}%
+        </div>
+
       </div>
 
-      <div className="water-text">{percent.toFixed(0)}%</div>
     </div>
   );
 };

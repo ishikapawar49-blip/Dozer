@@ -1,0 +1,36 @@
+/* ===== RESET ===== */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+
+/* ===== MAIN FLEX LAYOUT ===== */
+.admin-layout {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ===== SIDEBAR SPACE ===== */
+.sidebar {
+  /* width: 250px; */
+  flex-shrink: 0;
+}
+
+/* ===== RIGHT SIDE ===== */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #f1f5f9;
+}
+
+/* ===== SCROLL ONLY CONTENT ===== */
+.page-content {
+  flex: 1;
+  overflow-y: auto;
+  /* padding: 20px 24px; */
+
+  width: 100%;        
+  box-sizing: border-box;
+}
