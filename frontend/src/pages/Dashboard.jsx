@@ -20,7 +20,7 @@ const Dashboard = () => {
   const lastAlerts = useRef({});
   const [engineOn, setEngineOn] = useState(false);
   const [searchParams] = useSearchParams();
-const vehicle = searchParams.get("vehicle") || "MH9090";
+const vehicle = searchParams.get("vehicle");
   const isEmbedded = window.self !== window.top;
 
   const fetchTelemetryForVehicle = async (vehicleNumber) => {
@@ -39,9 +39,7 @@ const vehicle = searchParams.get("vehicle") || "MH9090";
 useEffect(() => {
 
   // ✅ Agar vehicle param hai to vehicle-specific fetch karo
-  const url = vehicle
-  ? `${TELEMETRY_API}/${vehicle}`
-  : `${TELEMETRY_API}/all-latest`;
+ const url = `${TELEMETRY_API}/all-latest`;
 
   axios
     .get(url)
@@ -59,8 +57,7 @@ useEffect(() => {
 
  const handler = (data) => {
 
-  if (!vehicle || data.vehicleNumber !== vehicle) return;
-
+if (vehicle && data.vehicleNumber !== vehicle) return;
   setTelemetry(data);
   setEngineOn(data.engineOn);
 

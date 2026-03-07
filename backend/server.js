@@ -11,6 +11,9 @@ import telemetryRoutes from "./routes/telemetryRoutes.js";
 import dozerRoutes from "./routes/dozerRoutes.js";
 import serviceRoutes from "./routes/serviceRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
+import adminRoutes from "./routes/adminRoutes.js";
+import notificationRoutes from "./routes/notificationRoutes.js";
+
 dotenv.config(); // ⭐ MUST BE BEFORE mongoose.connect
 
 const app = express();
@@ -20,6 +23,9 @@ app.use("/api/telemetry", telemetryRoutes);
 app.use("/api/dozers", dozerRoutes);
 app.use("/api/services", serviceRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/admin", adminRoutes);
+app.use("/api/notifications", notificationRoutes);
+
 /* ===== MongoDB ===== */
 const MONGO_URI = process.env.MONGO_URI;
 

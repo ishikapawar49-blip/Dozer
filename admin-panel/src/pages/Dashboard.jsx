@@ -41,8 +41,7 @@ useEffect(() => {
       }
 
     } catch (err) {
-      console.error("Dashboard fetch failed", err);
-    }
+console.error("Dashboard fetch failed", err.response?.data || err.message);    }
   };
 
   fetchDozers();

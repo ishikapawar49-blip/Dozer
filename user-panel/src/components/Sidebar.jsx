@@ -1,20 +1,64 @@
-import { Link } from "react-router-dom";
-import "../styles/Sidebar.css";
+import { NavLink, useNavigate } from "react-router-dom";
+import { 
+  FaTachometerAlt, 
+  FaTools, 
+  FaTruckMoving, 
+  FaSignOutAlt 
+} from "react-icons/fa";
+import "../styles/sidebar.css";
 
-const Sidebar = () => {
+export default function Sidebar() {
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+
+    // remove stored data
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    localStorage.removeItem("dozer");
+
+    // redirect to login
+    navigate("/login");
+
+  };
+
   return (
-    <div className="sidebar">
-      <h2 className="logo">Owner Panel</h2>
+    <aside className="user-sidebar">
 
-      <nav>
-        <Link to="/">Dashboard</Link>
-        <Link to="/vehicles">My Vehicles</Link>
-        <Link to="/bookings">Bookings</Link>
-        <Link to="/earnings">Earnings</Link>
-        <Link to="/profile">Profile</Link>
+      {/* Logo */}
+      <div className="user-sidebar-logo">
+        <h2>DOZER</h2>
+      </div>
+
+      {/* Menu */}
+      <nav className="user-sidebar-menu">
+
+        <NavLink to="/user/dashboard">
+          <FaTruckMoving className="user-sidebar-icon" />
+          Dashboard
+        </NavLink>
+
+        <NavLink to="/user/profile">
+          <FaTools className="user-sidebar-icon" />
+          Profile
+        </NavLink>
+
+        <NavLink to="/user/service-management">
+          <FaTools className="user-sidebar-icon" />
+          Service Management
+        </NavLink>
+
       </nav>
-    </div>
-  );
-};
 
-export default Sidebar;
+      {/* Logout */}
+      <button
+        className="user-sidebar-logout"
+        onClick={handleLogout}
+      >
+        <FaSignOutAlt /> Logout
+      </button>
+
+    </aside>
+  );
+}

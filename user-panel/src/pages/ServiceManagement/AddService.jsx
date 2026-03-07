@@ -11,13 +11,13 @@ const AddService = () => {
   const [serviceCount, setServiceCount] = useState(0);
   const { id } = useParams();
 
-  const [form, setForm] = useState({
-    dozerId: "",
-    serviceType: "",
-    serviceDate: "",
-    nextServiceDate: "",
-    cost: "",
-  });
+ const [form, setForm] = useState({
+  dozerId: "",
+  serviceType: "",
+  description: "",
+  serviceDate: "",
+  cost: "",
+});
 
   useEffect(() => {
     fetchDozers();
@@ -34,13 +34,13 @@ const AddService = () => {
 
       const s = res.data;
 
-      setForm({
-        dozerId: s.dozerId?._id || "",
-        serviceType: s.serviceType || "",
-        serviceDate: s.serviceDate?.split("T")[0] || "",
-        nextServiceDate: s.nextServiceDate?.split("T")[0] || "",
-        cost: s.cost || "",
-      });
+     setForm({
+  dozerId: s.dozerId?._id || "",
+  serviceType: s.serviceType || "",
+  description: s.description || "",
+  serviceDate: s.serviceDate?.split("T")[0] || "",
+  cost: s.cost || "",
+});
 
     } catch (err) {
       console.error("Failed to fetch service");
@@ -50,10 +50,13 @@ const AddService = () => {
   fetchSingleService();
 }, [id]);
 
-  const fetchDozers = async () => {
-    const res = await axios.get("http://localhost:5000/api/dozers");
-    setDozers(res.data);
-  };
+const fetchDozers = async () => {
+  const user = JSON.parse(localStorage.getItem("user"));
+  const res = await axios.get(
+    `http://localhost:5000/api/dozers/driver/${user._id}`
+  );
+  setDozers([res.data]); 
+};
 
   // fetch service count
   const fetchServiceCount = async (dozerId) => {
@@ -101,7 +104,7 @@ const validate = (name, value) => {
   /* ===== REQUIRED ===== */
   if (
     !value &&
-    ["dozerId", "serviceType", "serviceDate", "nextServiceDate", "cost"].includes(name)
+    ["dozerId", "serviceType","description", "serviceDate", "cost"].includes(name)
   ) {
     msg = "Required field";
   }
@@ -124,28 +127,26 @@ const validate = (name, value) => {
     }
   }
 
-  /* ===== NEXT SERVICE DATE ===== */
-  if (name === "nextServiceDate" && value) {
-    if (!isValidDate(value)) {
-      msg = "Invalid next service date";
-    }
+//   /* ===== NEXT SERVICE DATE ===== */
+//   if (name === "nextServiceDate" && value) {
+//     if (!isValidDate(value)) {
+//       msg = "Invalid next service date";
+//     }
 
-    if (
-      form.serviceDate &&
-      new Date(value) <= new Date(form.serviceDate)
-    ) {
-      msg = "Next service must be after service date";
-    }
-  }
+//     if (
+//       form.serviceDate &&
+//       new Date(value) <= new Date(form.serviceDate)
+//     ) {
+//       msg = "Next service must be after service date";
+//     }
+//   }
 
   /* ===== COST ===== */
   if (name === "cost" && value) {
     const cost = Number(value);
-
     if (cost <= 0) msg = "Cost must be greater than 0";
     else if (cost > 1000000) msg = "Cost too high";
   }
-
   setErrors((prev) => ({ ...prev, [name]: msg }));
 };
 
@@ -207,19 +208,30 @@ const handleSubmit = async (e) => {
 
   try {
     if (id) {
-      await axios.put(
-        `http://localhost:5000/api/services/${id}`,
-        form
-      );
+      const token = localStorage.getItem("token");
+
+await axios.put(
+  `http://localhost:5000/api/services/${id}`,
+  form,
+  {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  }
+);
     } else {
-      await axios.post(
-        "http://localhost:5000/api/services",
-        form
-      );
+      const token = localStorage.getItem("token");
+
+await axios.post(
+  "http://localhost:5000/api/services",
+  {
+    ...form,
+    serviceDate: new Date(form.serviceDate)
+  }
+);
     }
 
-    navigate("/admin/service");
-
+navigate("/user/service-management");
   } catch (err) {
     console.error("Save failed");
   }
@@ -290,6 +302,19 @@ const handleSubmit = async (e) => {
             {errors.serviceType && <p className="svc-error">{errors.serviceType}</p>}
           </div>
 
+<div className="svc-add-field full-width">
+  <label>Problem Description</label>
+
+  <textarea
+    name="description"
+    value={form.description}
+    placeholder="Describe the problem with the dozer..."
+    rows="4"
+    onChange={handleChange}
+  />
+
+</div>
+
           {/* Service Date */}
           <div className="svc-add-field">
             <label>Service Date</label>
@@ -304,7 +329,7 @@ const handleSubmit = async (e) => {
             {errors.serviceDate && <p className="svc-error">{errors.serviceDate}</p>}
           </div>
 
-          {/* Next Service Date */}
+          {/* Next Service Date
           <div className="svc-add-field">
             <label>Next Service Date</label>
             <input
@@ -322,11 +347,11 @@ const handleSubmit = async (e) => {
             {errors.nextServiceDate && (
               <p className="svc-error">{errors.nextServiceDate}</p>
             )}
-          </div>
+          </div> */}
 
           {/* Cost */}
           <div className="svc-add-field full-width">
-            <label>Cost</label>
+            <label>Service Cost</label>
             <input
   type="text"
   name="cost"
@@ -349,8 +374,7 @@ const handleSubmit = async (e) => {
             <button
               type="button"
               className="svc-add-cancel-btn-new"
-              onClick={() => navigate("/admin/service")}
-            >
+onClick={() => navigate("/user/service-management")}            >
               Cancel
             </button>
           </div>

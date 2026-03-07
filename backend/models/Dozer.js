@@ -3,11 +3,11 @@ import mongoose from "mongoose";
 const dozerSchema = new mongoose.Schema(
   {
         // 🔥 ADD THIS
-    owner: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-    },
+    // owner: {
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   ref: "User",
+    //   required: true,
+    // },
 
     vehicleNumber: { type: String, required: true },
     model: String,
@@ -15,16 +15,25 @@ const dozerSchema = new mongoose.Schema(
     year: String,
     expectedLifeYears: Number,   
     purchaseDate: String,
+
     status: {
-  type: String,
-  enum: ["Active", "Inactive", "Maintenance"],
-  default: "Active",
+      type: String,
+      enum: ["Active", "Inactive", "Maintenance"],
+      default: "Active",
+},
+
+// DRIVER DETAILS
+
+driverId: {
+  type: mongoose.Schema.Types.ObjectId,
+  ref: "User",
+  required: true
 },
 
     driverName: { type: String, required: true },
     driverPhone: { type: String, required: true },
     licenseNumber: String,
-
+    driverDOB: String,   
     lastServiceDate: String,
     nextServiceDate: String,
     serviceCost: String,

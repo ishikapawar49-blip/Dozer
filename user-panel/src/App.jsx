@@ -1,23 +1,36 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Layout from "./components/Layout";
 
-import Login from "./pages/Login"
+import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
+import Profile from "./pages/Profile";
+import ServiceManagement from "./pages/ServiceManagement/ServiceManagement";
+import AddService from "./pages/ServiceManagement/AddService";
 
-// import Vehicles from "./pages/Vehicles";
-// import Bookings from "./pages/Bookings";
-// import Earnings from "./pages/Earnings";
-// import Profile from "./pages/Profile";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Dashboard />} />
+
+        {/* Default redirect */}
+        <Route path="/" element={<Navigate to="/user/Dashboard" />} />
+
+        {/* Login */}
         <Route path="/login" element={<Login />} />
-        {/* <Route path="/vehicles" element={<Vehicles />} />
-        <Route path="/bookings" element={<Bookings />} />
-        <Route path="/earnings" element={<Earnings />} />
-        <Route path="/profile" element={<Profile />} /> */}
+
+        {/* User panel */}
+        <Route path="/user" element={<Layout />}>
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="profile" element={<Profile />} />
+<Route path="service-management" element={<ServiceManagement />} />
+  <Route path="service-management/add-service" element={<AddService />} />
+<Route
+  path="/user/service-management/add-service/:id"
+  element={<AddService />}
+/>
+        </Route>
+
       </Routes>
     </BrowserRouter>
   );

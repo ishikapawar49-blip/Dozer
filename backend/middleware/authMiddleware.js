@@ -21,17 +21,17 @@ export const protect = async (req, res, next) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     // Get user from DB
-    const user = await User.findById(decoded.id).select("-password");
+const user = await User.findById(decoded.id).select("-password");
 
-    if (!user) {
-      return res.status(401).json({ message: "User not found" });
-    }
-
-    // Attach user to request
-    req.user = {
-      id: user._id,
-      role: user.role
-    };
+// Agar user DB me nahi mila to bhi request allow karo
+if (!user) {
+  req.user = { id: decoded.id };
+} else {
+  req.user = {
+    id: user._id,
+    role: user.role
+  };
+}
 
     next();
   } catch (error) {

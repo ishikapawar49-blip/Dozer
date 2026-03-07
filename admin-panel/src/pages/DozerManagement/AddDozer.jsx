@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import API from "../../services/api";
 import { useNavigate, useParams } from "react-router-dom";
@@ -13,6 +14,7 @@ const initialForm = {
   expectedLifeYears: "",
   purchaseDate: "",
   status: "Active",
+  driverId: "",   
   driverName: "",
   driverPhone: "",
   licenseNumber: "",
@@ -24,6 +26,7 @@ const initialForm = {
 const AddDozer = () => {
   const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState({});
+  const [drivers, setDrivers] = useState([]);
   const [dozers, setDozers] = useState([]);
   const [openMenuId, setOpenMenuId] = useState(null);
   const [editId, setEditId] = useState(null);
@@ -35,11 +38,16 @@ const AddDozer = () => {
     /* ===== DATE VALIDATION ===== */
 
 const isValidDate = (dateStr) => {
+  if (!dateStr) return true;
+
   const d = new Date(dateStr);
+
+  if (isNaN(d.getTime())) return false;
+
   const year = d.getFullYear();
   const current = new Date().getFullYear();
 
- return !isNaN(d.getTime()) && year >= 2000 && year <= current + 5;
+  return year >= 2000 && year <= current + 5;
 };
 
   /* ================= VALIDATION ================= */
@@ -48,7 +56,7 @@ const validate = (name, value) => {
   let msg = "";
 
   /* ===== REQUIRED ===== */
-if (!value && ["vehicleNumber", "driverName", "driverPhone"].includes(name)) {
+if (!value && ["vehicleNumber", "driverName"].includes(name)) {
   msg = "Required field";
 }
 
@@ -113,6 +121,22 @@ if (name === "serviceCost" && value) {
     validate(name, value);
   };
 
+  // handle driver
+const handleDriverSelect = (e) => {
+  const driverId = e.target.value;
+
+  const driver = drivers.find(d => d._id === driverId);
+  if (!driver) return;
+
+  setForm(prev => ({
+    ...prev,
+    driverId: driver._id,   // ⭐ important
+    driverName: driver.name,
+    driverPhone: driver.phone,
+    licenseNumber: driver.license,
+    driverDOB: driver.dob
+  }));
+};
   /* ================= FETCH ================= */
 
   const fetchDozers = async () => {
@@ -158,6 +182,21 @@ if (name === "serviceCost" && value) {
 
   fetchSingleDozer();
 }, [id]);
+
+// driver fetch 
+useEffect(() => {
+  const fetchDrivers = async () => {
+    try {
+      const res = await API.get("/users");
+      setDrivers(res.data);
+    } catch (err) {
+      console.error("Failed to fetch drivers", err);
+    }
+  };
+
+  fetchDrivers();
+}, []);
+
   /* ================= SUBMIT ================= */
 
 const validateAll = () => {
@@ -166,7 +205,7 @@ const validateAll = () => {
   Object.entries(form).forEach(([key, value]) => {
     let msg = "";
 
-    if (!value && ["vehicleNumber", "driverName", "driverPhone"].includes(key)) {
+    if (!value && ["vehicleNumber", "driverName"].includes(key)) {
       msg = "Required field";
     }
 
@@ -230,9 +269,9 @@ const handleSubmit = async (e) => {
     setEditId(null);
 
   } catch (err) {
-    toast.error("Something went wrong ❌");
-  }
-
+  console.log(err.response?.data);
+  toast.error(err.response?.data?.message || "Something went wrong");
+}
   setLoading(false);
 };
 
@@ -311,33 +350,34 @@ const handleSubmit = async (e) => {
   max={new Date().toISOString().split("T")[0]}
 />
 
-          <SelectField name="status" value={form.status} onChange={handleChange} />
+<div className="field">
+<label>Driver Name</label>
 
-        <Field
-  label="Driver Name"
-  name="driverName"
-  value={form.driverName}
-  onChange={(e) => {
-    const val = e.target.value.replace(/[^A-Za-z ]/g, "");
-    setForm((p) => ({ ...p, driverName: val }));
-    validate("driverName", val);
-  }}
-  error={errors.driverName}
-/>
-         <Field
-  label="Driver Phone"
-  name="driverPhone"
-  value={form.driverPhone}
-  onChange={(e) => {
-    const val = e.target.value.replace(/\D/g, "").slice(0, 10);
-    setForm({ ...form, driverPhone: val });
-    validate("driverPhone", val);
-  }}
-  error={errors.driverPhone}
+<select value={form.driverId} onChange={handleDriverSelect}>
+<option value="">Select Driver</option>
+
+{drivers.map(d => (
+<option key={d._id} value={d._id}>
+{d.name}
+</option>
+))}
+
+</select>
+
+</div>
+<Field
+label="Driver Phone"
+name="driverPhone"
+value={form.driverPhone}
+readOnly
 />
 
-          <Field label="License Number" name="licenseNumber" value={form.licenseNumber} onChange={handleChange} />
-
+<Field
+label="License Number"
+name="licenseNumber"
+value={form.licenseNumber}
+readOnly
+/>
        <Field
   label="Last Service Date"
   name="lastServiceDate"

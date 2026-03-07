@@ -138,7 +138,6 @@ const inactiveCount = dozers.filter(d => d.status === "Inactive").length;
   </div>
 
   </div>
-
   <button
     className="primary-btn"
     onClick={() => navigate("/admin/dozer-management/add-dozer")}
@@ -198,7 +197,6 @@ const inactiveCount = dozers.filter(d => d.status === "Inactive").length;
               <th>Last Service</th>
               <th>Next Service</th>
               <th>Status</th>
-               <th>Owner</th> 
               <th>Actions</th>
             </tr>
           </thead>
@@ -206,7 +204,7 @@ const inactiveCount = dozers.filter(d => d.status === "Inactive").length;
           <tbody>
             {filteredDozers.length === 0 ? (
               <tr>
-                <td colSpan="12" style={{ textAlign: "center" }}>
+                <td colSpan="11" style={{ textAlign: "center" }}>
                   No dozers found
                 </td>
               </tr>
@@ -246,8 +244,6 @@ const inactiveCount = dozers.filter(d => d.status === "Inactive").length;
     </span>
   </div>
 </td>
-
-<td>{d.owner?.name}</td>
 
 <td className="action-cell">
   <div className="action-buttons">

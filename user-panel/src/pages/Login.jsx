@@ -8,27 +8,23 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
+const handleLogin = async (e) => {
+  e.preventDefault();
 
-    try {
-      const res = await API.post("/users/login", {
-        email,
-        password,
-      });
+  try {
+   const res = await API.post("/users/login", {
+  email: email.toLowerCase().trim(),
+  password: password.trim(),
+});
 
-      localStorage.setItem("token", res.data.token);
-
-      if (res.data.role === "owner") {
-        navigate("/");
-      } else {
-        alert("Not authorized as Owner");
-      }
-
-    } catch (err) {
-      alert("Login failed");
-    }
-  };
+    localStorage.setItem("token", res.data.token);
+    localStorage.setItem("user", JSON.stringify(res.data.user));
+    localStorage.setItem("dozer", JSON.stringify(res.data.dozer));
+   navigate("/user/dashboard");
+  } catch (err) {
+    alert(err.response?.data?.message || "Login failed");
+  }
+};
 
   return (
     <div className="login-container">
@@ -43,13 +39,13 @@ const Login = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
 
-          <input
-            type="password"
-            placeholder="Password"
-            required
-            onChange={(e) => setPassword(e.target.value)}
-          />
-
+<input
+  type="password"
+  placeholder="Password"
+  required
+  value={password}
+  onChange={(e) => setPassword(e.target.value)}
+/>
           <button type="submit">Login</button>
         </form>
       </div>
