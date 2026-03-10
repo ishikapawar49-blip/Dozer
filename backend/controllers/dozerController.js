@@ -85,25 +85,23 @@ export const deleteDozer = async (req, res) => {
 };
 
 // popup
-export const getDozerByDriver = async (req,res)=>{
-  try{
-
-    // const driverId = new mongoose.Types.ObjectId(req.params.id);
+export const getDozerByDriver = async (req, res) => {
+  try {
 
     const dozer = await Dozer.findOne({
-      driverId: driverId
+      driverId: req.params.id
     });
 
-    if(!dozer){
+    if (!dozer) {
       return res.status(404).json(null);
     }
 
     res.json(dozer);
 
-  }catch(err){
-    res.status(500).json(err);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
-}
+};
 
 export const getMyDozer = async (req, res) => {
   try {
@@ -116,6 +114,22 @@ export const getMyDozer = async (req, res) => {
       return res.status(404).json({
         message: "No dozer allocated"
       });
+    }
+
+    res.json(dozer);
+
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+export const getDozerById = async (req, res) => {
+  try {
+
+    const dozer = await Dozer.findById(req.params.id);
+
+    if (!dozer) {
+      return res.status(404).json({ message: "Dozer not found" });
     }
 
     res.json(dozer);

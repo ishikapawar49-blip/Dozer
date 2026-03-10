@@ -29,7 +29,7 @@ const serviceSchema = new mongoose.Schema({
 
   status: {
     type: String,
-    enum: ["Pending", "Approved", "Done"],
+    enum: ["Pending", "Approved", "Completed"],
     default: "Pending",
   }
 

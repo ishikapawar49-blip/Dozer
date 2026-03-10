@@ -5,9 +5,9 @@ import Notification from "../models/Notification.js";
 export const getMyServices = async (req, res) => {
   try {
 
-    const userId = req.user.id;
+   const userId = req.user.id || req.user._id;
 
-    const dozer = await Dozer.findOne({ driverId: userId });
+const dozer = await Dozer.findOne({ driverId: userId });
 
     if (!dozer) {
       return res.json([]);
@@ -24,6 +24,33 @@ export const getMyServices = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+
+// GET single service (for edit page)
+
+export const getServiceById = async (req, res) => {
+  try {
+
+    const service = await Service
+      .findById(req.params.id)
+      .populate("dozerId", "vehicleNumber");
+
+    if (!service) {
+      return res.status(404).json({
+        message: "Service not found"
+      });
+    }
+
+    res.json(service);
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: error.message
+    });
+  }
+};
+
 
 export const updateServiceStatus = async (req, res) => {
   try {
@@ -68,3 +95,4 @@ export const updateServiceStatus = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+

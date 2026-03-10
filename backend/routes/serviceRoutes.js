@@ -1,6 +1,6 @@
 import express from "express";
 import Service from "../models/serviceModel.js";
-import { getMyServices, updateServiceStatus } from "../controllers/serviceController.js";
+import { getMyServices, getServiceById, updateServiceStatus } from "../controllers/serviceController.js";
 import { protect } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
@@ -26,6 +26,9 @@ res.status(500).json({ error: err.message });  }
 /* Driver Services */
 router.get("/my-services", protect, getMyServices);
 
+
+// ⭐ ADD THIS
+router.get("/:id", protect, getServiceById);
 /* Update Status (ADMIN) */
 // router.put("/:id/status", updateServiceStatus);
 /* Update Status */
