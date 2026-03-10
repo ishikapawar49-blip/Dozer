@@ -1,10 +1,11 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { 
-  FaTachometerAlt, 
-  FaTools, 
-  FaTruckMoving, 
-  FaSignOutAlt 
+  FaTools,
+  FaTruckMoving,
+  FaSignOutAlt,
+  FaUser
 } from "react-icons/fa";
+
 import "../styles/sidebar.css";
 
 export default function Sidebar() {
@@ -39,10 +40,10 @@ export default function Sidebar() {
           Dashboard
         </NavLink>
 
-        <NavLink to="/user/profile">
-          <FaTools className="user-sidebar-icon" />
-          Profile
-        </NavLink>
+       <NavLink to="/user/profile">
+  <FaUser className="user-sidebar-icon" />
+  Profile
+</NavLink>
 
         <NavLink to="/user/service-management">
           <FaTools className="user-sidebar-icon" />

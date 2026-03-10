@@ -6,6 +6,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 30px;
+  margin-left: 240px;              /* ⭐ ADD THIS */
   flex-shrink: 0;   
 }
 
@@ -103,4 +104,19 @@ color: white;
 font-size: 12px;
 padding: 2px 6px;
 border-radius: 50%;
+}
+
+
+.navbar-notification-item{
+display:flex;
+align-items:center;
+gap:10px;
+padding:8px 10px;
+font-size:14px;
+border-bottom:1px solid #eee;
+}
+
+.notification-icon{
+color:#f5a623;
+font-size:16px;
 }

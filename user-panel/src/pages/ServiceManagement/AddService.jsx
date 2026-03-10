@@ -28,9 +28,17 @@ const AddService = () => {
 
   const fetchSingleService = async () => {
     try {
-      const res = await axios.get(
-        `http://localhost:5000/api/services/${id}`
-      );
+      const token = localStorage.getItem("token");
+
+const res = await axios.get(
+  `http://localhost:5000/api/services/${id}`,
+  {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  }
+);
+
 
       const s = res.data;
 
@@ -41,6 +49,11 @@ const AddService = () => {
   serviceDate: s.serviceDate?.split("T")[0] || "",
   cost: s.cost || "",
 });
+
+ // ⭐ ADD THIS
+    if (s.dozerId?._id) {
+      fetchServiceCount(s.dozerId._id);
+    }
 
     } catch (err) {
       console.error("Failed to fetch service");
@@ -249,7 +262,9 @@ navigate("/user/service-management");
       </button>
 
       <div className="svc-add-card-new">
-        <h2 className="svc-add-title-new">Add New Service</h2>
+       <h2 className="svc-add-title-new">
+  {id ? "Edit Service" : "Add New Service"}
+</h2>
 
         <form className="svc-add-grid-form" onSubmit={handleSubmit}>
 {/* Vehicle */}
@@ -367,9 +382,9 @@ navigate("/user/service-management");
           </div>
 
           <div className="svc-add-btn-group full-width">
-            <button type="submit" className="svc-add-save-btn-new">
-              Save Service
-            </button>
+           <button type="submit" className="svc-add-save-btn-new">
+  {id ? "Update Service" : "Save Service"}
+</button>
 
             <button
               type="button"

@@ -149,7 +149,7 @@ const handleChange = async (e) => {
 
           <div className="user-prof-name">
             <h2>{data.name}</h2>
-            <p>Fleet Owner</p>
+
           </div>
 
           <div className="user-prof-actions">

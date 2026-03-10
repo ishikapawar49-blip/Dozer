@@ -521,3 +521,9 @@ resize: vertical;   /* only vertical resize */
 max-height: 200px;  /* limit height */
 overflow-y: auto;   /* scroll after limit */
 }
+.svc-add-wrapper {
+  width: calc(100% - 240px);
+  margin-left: 240px;
+  padding: 30px 40px;
+  box-sizing: border-box;
+}

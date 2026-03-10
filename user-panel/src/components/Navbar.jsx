@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { FaMoon, FaBell } from "react-icons/fa";
+import { FiBell } from "react-icons/fi";
 import API from "../services/api";
 import "../styles/navbar.css";
 
@@ -23,10 +24,6 @@ const fetchNotifications = async () => {
 
       <div className="navbar-right">
 
-        <button className="navbar-icon-btn">
-          <FaMoon />
-        </button>
-
         {/* 🔔 Notification */}
         <div className="navbar-notification-wrapper">
           <button
@@ -49,10 +46,11 @@ const fetchNotifications = async () => {
       <p>No notifications</p>
     ) : (
       notifications.map((n) => (
-        <div key={n._id} className="navbar-notification-item">
-          🔔 {n.message}
-        </div>
-      ))
+  <div key={n._id} className="navbar-notification-item">
+    <FiBell className="notification-icon" />
+    {n.message}
+  </div>
+))
     )}
 
   </div>
