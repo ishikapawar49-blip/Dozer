@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import API from "../../services/api";
 import { useNavigate } from "react-router-dom";
-import { FiSearch, FiUsers } from "react-icons/fi";
+import { FiSearch, FiUsers, FiTruck, FiX } from "react-icons/fi";
+// import { FaTruckMonster } from "react-icons/fa";
 import "../../styles/dozerManagement.css";
 
 const UserManagement = () => {
@@ -181,13 +182,18 @@ onClick={() => openDriverDozer(u._id)}>
   <div className="dozer-modal">
 
     <div className="dozer-modal-header">
-      <h2>🚜 Driver Dozer Details</h2>
-      <button
-        className="close-btn"
-        onClick={() => setShowModal(false)}
-      >
-        ✕
-      </button>
+ <h2 className="modal-title">
+  <span className="modal-icon-box">
+    <FiTruck className="modal-icon"/>
+  </span>
+  Driver Dozer Details
+</h2>
+<button
+  className="close-btn"
+  onClick={() => setShowModal(false)}
+>
+  <FiX />
+</button>
     </div>
 
     <div className="dozer-grid">

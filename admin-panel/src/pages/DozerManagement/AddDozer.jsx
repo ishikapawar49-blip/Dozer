@@ -153,7 +153,7 @@ const handleDriverSelect = (e) => {
 
   const fetchSingleDozer = async () => {
     try {
-     const res = await API.get("/dozers");
+     const res = await API.get(`/dozers/${id}`);
 
       const d = res.data;
 
@@ -299,10 +299,10 @@ const handleSubmit = async (e) => {
 
       {/* ================= FORM ================= */}
 <div className="card">
-    <h2 className="title">Add New Dozer</h2>
-
-    <form className="grid" onSubmit={handleSubmit}>
-
+<form onSubmit={handleSubmit}>
+  
+  <h3 className="section-title">Vehicle Details</h3>
+         <div className="grid">
          <Field
   label="Vehicle Number"
   name="vehicleNumber"
@@ -349,11 +349,15 @@ const handleSubmit = async (e) => {
   min="2000-01-01"
   max={new Date().toISOString().split("T")[0]}
 />
+</div>
 
+<h3 className="section-title">Driver Details</h3>
+
+<div className="grid">
 <div className="field">
 <label>Driver Name</label>
 
-<select value={form.driverId} onChange={handleDriverSelect}>
+<select name="driverId" value={form.driverId} onChange={handleDriverSelect}>
 <option value="">Select Driver</option>
 
 {drivers.map(d => (
@@ -378,6 +382,10 @@ name="licenseNumber"
 value={form.licenseNumber}
 readOnly
 />
+</div>
+
+<h3 className="section-title">Service Details</h3>
+<div className="grid">
        <Field
   label="Last Service Date"
   name="lastServiceDate"
@@ -421,6 +429,7 @@ readOnly
         <button disabled={loading}>
           {loading ? "Saving..." : editId ? "Update Dozer" : "Save Dozer"}
         </button>
+      </div>
       </div>
     </form>
   </div>
