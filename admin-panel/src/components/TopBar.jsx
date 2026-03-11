@@ -11,10 +11,6 @@ export default function Topbar({ notifications = [] }) {
 
       <div className="topbar-right">
 
-        <button className="icon-btn">
-          <FaMoon />
-        </button>
-
         {/* 🔔 Notification */}
         <div className="notification-wrapper">
           <button
